@@ -5,13 +5,14 @@ public class CurrencySiri {
   public static void main(String[] args){
     Scanner scanner = new Scanner(System.in);
     System.out.println("Hi! Welcome to Currency Siri");
+    boolean done =false;
 
     while (!done){
       String userInput= scanner.nextLine();
       String[] input = userInput.split("\\s+");
       Double fValue = getFinalValue(input);
       System.out.printf("%1.2f%n%n",fValue);
-      done = userResponse.equals("bye");
+      done = userResponse.equals("bye");  //done = userInput.equals("bye")?
     }
 
 
@@ -38,6 +39,7 @@ public class CurrencySiri {
 
   public static String getInitialCurr (String[] input){
     // this recognizes the initial currency in the user's input
+    if
   }
 
   public static String getFinalCurr (String[] input){
