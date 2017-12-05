@@ -25,6 +25,14 @@ public class CurrencySiri {
   }
 
   public static Double getInitialValue (String[] input) {
+    if (StringArray.intersects(nums,NumberValue)) {
+  String[] history = new String[1000];
+  String userResponse = scanner.nextLine();
+  history[count] = userResponse;
+  }
+
+  public static String[] NumberValue = {"1","2","3","4",
+    "5","6","7","8","9","0"};
     // this recognizes the number in the user's input as the initial value
   }
 
