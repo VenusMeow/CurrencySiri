@@ -1,7 +1,12 @@
 package project;
 
 public class Rate {
-
+  /**
+    getRate(iCurr,fCurr) gets the exchange rate between the two currency
+    @param iCurr an integer of the inital Currency index
+    @param fCurr an integer of the final Currency index
+    @return the exhange rate 
+  */
   public static double getRate (int iCurr, int fCurr){
     // this gets the exchange rate between the two currency
     // we uses the exchange rate of each currency to USD to do the caculatation
