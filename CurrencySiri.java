@@ -3,14 +3,15 @@ import java.util.Scanner;
 import project.Rate;
 
 public class CurrencySiri {
-  /**
+
+/**
     Prompts the user to enter sentences
     Last sentence should be "bye"
     Recognize the inital value, the inital currency type and final currency type
     Prints out the amount after calculations
     Exits the program after saying "bye".
     @param args the command line arguments which are ignored
-  */
+*/
   public static void main(String[] args){
     Scanner scanner = new Scanner(System.in);
     printInstructions();
@@ -25,10 +26,11 @@ public class CurrencySiri {
     }
     System.out.println("Bye! Thank you for using Currency Siri");
   }
-  /**
-    printInstructions() prompts the user for a sentence by printing a welcome sentence
-    it does not return anything
-  */
+
+/**
+  printInstructions() prompts the user for a sentence by printing a welcome sentence
+  it does not return anything
+*/
   public static void printInstructions() {
     System.out.println("Hi! Welcome to Currency Siri");
     System.out.println("Please use the three capital letter code for each currency, e.g. USD");
@@ -40,13 +42,11 @@ public class CurrencySiri {
   @param input an array of Strings that will be used to find the index
   @return the amount of the money the user wish to convert
 */
-
   public static double getInitialValue (String[] input) {
     int index = findNumber(input,numberValue);
     double value = Double.parseDouble(input[index]);
     return value;
   }
-
 
 /**
   calculate the final amount of money worth
@@ -80,11 +80,11 @@ public class CurrencySiri {
     return index;
   }
 
-  /**
-    recognize the position of the final currency that the user want to convert in the input
-    @param input an array of Strings of user input
-    @return the index of the final currency in the user input
-  */
+/**
+  recognize the position of the final currency that the user want to convert in the input
+  @param input an array of Strings of user input
+  @return the index of the final currency in the user input
+*/
   public static int getFinalCurr (String[] input){
     // this recognizes the final currency in the user's input
     int index = -1;
@@ -104,7 +104,6 @@ public class CurrencySiri {
   @param numberValue an array of Strings of digits
   @return the index of the monetary value in the user input
 */
-
   public static int findNumber(String[] input,String[] numberValue){
     int result=-1;
     for (int i=0;i<input.length;i++){
@@ -152,6 +151,6 @@ public class CurrencySiri {
     "HKD","INR","IDR","IRR","ILS","JPY","JOD","KES","MYR","MXN",
     "MNT","NPR","NGN","PKR","PHP","RUB","SAR","SGD","KRW","LKR",
     "SEK","TWD","THB","TRY","UAH","GBP","VEF","VND"
-    };
+  };
 
   }
