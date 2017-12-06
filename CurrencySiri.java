@@ -1,80 +1,125 @@
+package project;
 import java.util.Scanner;
+import project.Rate;
 
 public class CurrencySiri {
 
   public static void main(String[] args){
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Hi! Welcome to Currency Siri");
+    printInstructions();
     boolean done =false;
 
     while (!done){
       String userInput= scanner.nextLine();
       String[] input = userInput.split("\\s+");
-      Double fValue = getFinalValue(input);
+      double fValue = getFinalValue(input);
       System.out.printf("%1.2f%n%n",fValue);
-      done = userResponse.equals("bye");  //done = userInput.equals("bye")?
+      done = userInput.equals("bye");
     }
-
-
-
+    System.out.println("Bye! Thank you for using Currency Siri");
   }
 
-  public static Double getFinalValue (String[] input) {
-    Double iValue = getInitialValue(input);
-    Double rate = getRate(getInitialCurr(input),getFinalCurr(input));
-    return (iValue/rate);
+  public static void printInstructions() {
+    System.out.println("Hi! Welcome to Currency Siri");
+    System.out.println("Please use the three capital letter code for each currency, e.g. USD");
+    System.out.println("Enter bye to stop conversing.");
   }
 
-  public static Double getInitialValue (String[] input) {
-    if (StringArray.intersects(nums,NumberValue)) {
-  String[] history = new String[1000];
-  String userResponse = scanner.nextLine();
-  history[count] = userResponse;
+/**
+  recognizes the amount the user want to convert from the user's input
+  @param input an array of Strings that will be used to find the index
+  @return the amount of the money the user wish to convert
+*/
+
+  public static double getInitialValue (String[] input) {
+    int index = findNumber(input,numberValue);
+    double value = Double.parseDouble(input[index]);
+    return value;
   }
 
-  public static String[] NumberValue = {"1","2","3","4",
-    "5","6","7","8","9","0"};
-    // this recognizes the number in the user's input as the initial value
+
+/**
+  calculate the final amount of money worth
+  @param input an array of Strings
+*/
+  public static double getFinalValue (String[] input) {
+    double iValue = getInitialValue(input);
+    int iCurr = getInitialCurr(input);
+    int fCurr = getFinalCurr(input);
+    double rate = Rate.getRate(iCurr,fCurr);
+    double result = iValue*rate;
+    return result;
   }
 
-  public static String getInitialCurr (String[] input){
+
+  public static int getInitialCurr (String[] input){
     // this recognizes the initial currency in the user's input
-    if
-  }
-
-  public static String getFinalCurr (String[] input){
-    // this recognizes the final currency in the user's input
-  }
-
-  public static Double getRate (String iCurr, String fCurr){
-    // this gets the exchange rate between the two currency
-    // we uses the exchange rate of each currency to USD to do the caculatation
-    // e.g RMB to JPY:
-    // (RMB/(RMB/USD)) * (JPY/USD) = JPY
-    // RMB * ((JPY/USD)/(RMB/USD)) = JPY
-    // rate = (JPY/USD) / (RMB/USD)
-    double rate;
-    double iR,fR;
-    double [][] rateUSDs = {
-      {"AUD",1.31},{"BDT",82.89},{"BRL",3.24},{"CAD",1.27},{"RMB",6.61},
-      {"COP",2994.40},{"USD",1.00},{"EGP",17.70},{"EUR",0.84},{"GHS",4.47},
-      {"HKD",7.82},{"INR",64.30},{"IDR",13512.00},{"IRR",35240.00},{"ILS",3.49},
-      {"JPY",112.46},{"JOD",0.71},{"KES",103.20},{"MYR",4.05},{"MXN",18.59},
-      {"MNT",2443.50},{"NPR",102.93},{"NGN",360.00},{"PKR",105.31},{"PHP",50.56},
-      {"RUB",58.73},{"SAR",3.75},{"SGD",1.35},{"KRW",1083.99},{"LKR",153.39},
-      {"SEK",8.42},{"TWD",30.02},{"THB",32.55},{"TRY",3.88},{"UAH",27.20},
-      {"GBP",0.74},{"VEF",9.98},{"VND",22692.00}
-    }
-    for (int i=0; i<rateUSDs.length,i++){
-      if (iCurr.equals(rateUSDs[0])) {
-        iR = rateUSDs[1];
-      } else if (fCurr.equals(rateUSDs[0])){
-        fR = rateUSDs[1];
+    int index = -1;
+    int numindex = findNumber(input,numberValue);
+    int[] indexs = findName(input,currs);
+    for (int i=0;i<indexs.length;i+=2){
+      if (indexs[i]-1 == numindex){
+        index = indexs[i+1];
       }
     }
-    rate = fR/iR;
-    return rate;
+    return index;
+  }
+
+  public static int getFinalCurr (String[] input){
+    // this recognizes the final currency in the user's input
+    int index = -1;
+    int numindex = findNumber(input,numberValue);
+    int[] indexs = findName(input,currs);
+    for (int i=0;i<indexs.length;i+=2){
+      if (indexs[i]-1 != numindex){
+        index = indexs[i+1];
+      }
+    }
+    return index;
   }
 
 
-}
+
+  public static int findNumber(String[] input,String[] numberValue){
+    int result=-1;
+    for (int i=0;i<input.length;i++){
+      for (int j=0;j<numberValue.length;j++){
+        if (input[i].contains(numberValue[j])){
+          result = i;
+        }
+      }
+    }
+    return result;
+  }
+
+  public static int[] findName(String[] input,String[] currs){
+    int[] result = new int[4];
+    int count =0;
+    for (int i=0;i<input.length;i++){
+      for (int j=0;j<currs.length;j++){
+        if (input[i].equals(currs[j]) && count ==0){
+          result[0]=i;
+          result[1]=j;
+          count++;
+        } else if (input[i].equals(currs[j]) && count ==1){
+          result[2]=i;
+          result[3]=j;
+        }
+      }
+    }
+    return result;
+  }
+
+  public static String[] numberValue = {"1","2","3","4",
+    "5","6","7","8","9","0"};
+    // this recognizes the number in the user's input as the initial value
+
+
+  public static String[] currs = {
+    "AUD","BDT","BRL","CAD","RMB","COP","USD","EGP","EUR","GHS",
+    "HKD","INR","IDR","IRR","ILS","JPY","JOD","KES","MYR","MXN",
+    "MNT","NPR","NGN","PKR","PHP","RUB","SAR","SGD","KRW","LKR",
+    "SEK","TWD","THB","TRY","UAH","GBP","VEF","VND"
+    };
+
+  }
