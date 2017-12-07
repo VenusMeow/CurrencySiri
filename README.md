@@ -3,11 +3,12 @@ This is a final project for an introductory java programming class. We are desig
 
 
 Interaction examples:
-> what is 100 USD in RMB
-661.00
 
-> convert 100 RMB to HKD
-118.31
+Input: what is 100 USD in RMB
+Output: 661.00
 
-> how much JPY is 100 RMB
-1701.36
+Input: convert 100 RMB to HKD
+Output: 118.31
+
+Input: how much JPY is 100 RMB
+Output: 1701.36
