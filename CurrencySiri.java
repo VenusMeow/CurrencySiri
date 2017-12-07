@@ -24,14 +24,14 @@ public class CurrencySiri {
       if (userInput.equals("who is your maker")||userInput.equals("who made you")){
         //if user enters "who is your maker" it will print the answer
         System.out.printf("Venus, Gia, Jessie and Iris!%n");
-      } else {
+      } else if (!userInput.equals("bye")){
         String[] input = userInput.split(" ");
         //store the user's input line into an array of each word
         double fValue = getFinalValue(input);
         //this calls the getFinalValue method to find the final value after being exchanged
         System.out.printf("%1.2f%n%n",fValue);
-        done = userInput.equals("bye");
       }
+      done = userInput.equals("bye");
     }
     System.out.printf("Bye! Thank you for using Currency Siri!%n");
   }
